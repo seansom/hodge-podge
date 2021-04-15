@@ -64,7 +64,7 @@ def pressure_3():
     x = np.linspace(0, 120, 10000)
     y = p_sensor(pressure(x))
 
-    plt.title("Sensor Voltage Observed")
+    plt.title("Pressure Sensor Voltage Observed")
     plt.xlabel("Time [min]")
     plt.ylabel("Voltage [V]")
 
@@ -129,7 +129,7 @@ def temp_3():
     y = t_sensor(temp(x))
     y = 3.7 * (y / (y + 100000))
 
-    plt.title("Sensor Voltage Observed")
+    plt.title("Temperature Sensor Voltage Observed")
     plt.xlabel("Time [min]")
     plt.ylabel("Voltage [V]")
 
@@ -194,7 +194,7 @@ def humidity_3():
     x = np.linspace(0, 120, 10000)
     y = h_sensor(humidity(x))
 
-    plt.title("Sensor Voltage Observed")
+    plt.title("Humidity Sensor Voltage Observed")
     plt.xlabel("Time [min]")
     plt.ylabel("Voltage [V]")
 
