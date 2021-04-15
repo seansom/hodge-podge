@@ -13,7 +13,7 @@ plt.style.use('fivethirtyeight')
 def within(num, lo, hi):
     return lo <= num and num <= hi
 
-
+# piecewise function for pressure(time)
 @np.vectorize
 def pressure(t): 
     if within(t, 0, 25):
@@ -29,7 +29,7 @@ def pressure(t):
     else:
         return None
 
-
+# function for voltage(pressure)
 def p_sensor(p):
     return 9/280 * p + 0.5
 
@@ -75,7 +75,7 @@ def pressure_3():
     plt.show()
 
 
-
+# piecewise function for temperature(time)
 @np.vectorize
 def temp(t): 
     if within(t, 0, 10):
@@ -93,7 +93,7 @@ def temp(t):
     else:
         return None
 
-
+# function for thermistor resistance(temperature)
 def t_sensor(C):
     return 10000 * math.e ** (3810 * (1/(C + 273.15) - 1/298.15))
 
@@ -139,7 +139,7 @@ def temp_3():
     plt.plot(x, y)
     plt.show()
 
-
+# piecewise function for humidity(time)
 @np.vectorize
 def humidity(t): 
     if within(t, 0, 15):
@@ -159,7 +159,7 @@ def humidity(t):
     else:
         return None
 
-
+# function for voltage(relative humidity)
 def h_sensor(RH):
     return 7/1000 * RH + 0.15
 
@@ -197,8 +197,6 @@ def humidity_3():
     plt.title("Sensor Voltage Observed")
     plt.xlabel("Time [min]")
     plt.ylabel("Voltage [V]")
-
-   # plt.yticks(np.arange(min(y), max(y)+1, 0.2))
 
     plt.grid(True)
     plt.plot(x, y)
