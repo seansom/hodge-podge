@@ -182,9 +182,9 @@ def humidity_2():
     y = h_sensor(x)
 
     plt.title("Humidity Sensor Behavior")
-    plt.xlabel("Time [min]")
-    plt.ylabel("Relative Humidity [%]")
-
+    plt.xlabel("Relative Humidity [%]")
+    plt.ylabel("Voltage [V]")
+    
     plt.grid(True)
     plt.plot(x, y)
     plt.show()
