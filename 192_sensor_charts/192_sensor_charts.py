@@ -3,9 +3,12 @@
 # When the code is running, input # 1 - 9 to view a chart
 # Input q to quit the program
 
-import sys, math
+import os, sys, math
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt 
+
+os.chdir(sys.path[0])
 
 plt.style.use('fivethirtyeight')
 
@@ -13,21 +16,9 @@ plt.style.use('fivethirtyeight')
 def within(num, lo, hi):
     return lo <= num and num <= hi
 
-# piecewise function for pressure(time)
-@np.vectorize
-def pressure(t): 
-    if within(t, 0, 25):
-        return 100 - 3.4 * t 
-    elif within(t, 25, 60):
-        return 15 - 3/7 * (t - 25)
-    elif within(t, 60, 85):
-        return 3/5 * (t - 60)
-    elif within(t, 85, 105):
-        return 15 + 3/2 * (t - 85)
-    elif within(t, 105, 120):
-        return 45 + 11/3 * (t - 105)
-    else:
-        return None
+def pressure():
+    p_data = pd.read_csv('pressure_measurements.csv')
+    return (p_data['Time (min)'], p_data['Pressure (kPa)'])
 
 # function for voltage(pressure)
 def p_sensor(p):
@@ -35,8 +26,7 @@ def p_sensor(p):
 
 
 def pressure_1():
-    x = np.linspace(0, 120, 10000)    
-    y = pressure(x)
+    x, y = pressure()
 
     plt.title("Observed CanSat Pressure")
     plt.xlabel("Time [min]")
@@ -61,37 +51,24 @@ def pressure_2():
 
 
 def pressure_3():
-    x = np.linspace(0, 120, 10000)
-    y = p_sensor(pressure(x))
+    x, y = pressure()
+    y = p_sensor(y)
 
     plt.title("Pressure Sensor Voltage Observed")
     plt.xlabel("Time [min]")
     plt.ylabel("Voltage [V]")
 
-    plt.yticks(np.arange(min(y), max(y)+1, 0.2))
+    plt.yticks(np.arange(0, 3.8, 0.25))
 
     plt.grid(True)
     plt.plot(x, y)
     plt.show()
 
 
-# piecewise function for temperature(time)
-@np.vectorize
-def temp(t): 
-    if within(t, 0, 10):
-        return 20 - 7 * t 
-    elif within(t, 10, 20):
-        return -50
-    elif within(t, 20, 40):
-        return -50 + 0.5 * (t - 20)
-    elif within(t, 40, 60):
-        return -40 + 2 * (t - 40)
-    elif within(t, 60, 95):
-        return -10/7 * (t - 60)
-    elif within(t, 95, 120):
-        return -50 + 14/5 * (t - 95)
-    else:
-        return None
+def temp(): 
+    p_data = pd.read_csv('temp_measurements.csv')
+    return (p_data['Time (min)'], p_data['Temperature (Celsius)'])
+
 
 # function for thermistor resistance(temperature)
 def t_sensor(C):
@@ -99,8 +76,7 @@ def t_sensor(C):
 
 
 def temp_1():
-    x = np.linspace(0, 120, 10000)    
-    y = temp(x)
+    x, y = temp()
 
     plt.title("Observed CanSat Temperature")
     plt.xlabel("Time [min]")
@@ -125,39 +101,25 @@ def temp_2():
 
 
 def temp_3():
-    x = np.linspace(0, 120, 10000)
-    y = t_sensor(temp(x))
+    x, y = temp()
+    y = t_sensor(y)
     y = 3.7 * (y / (y + 100000))
 
     plt.title("Temperature Sensor Voltage Observed")
     plt.xlabel("Time [min]")
     plt.ylabel("Voltage [V]")
 
-    plt.yticks(np.arange(min(y), max(y)+1, 0.2))
+    plt.yticks(np.arange(0, 3.4, 0.2))
 
     plt.grid(True)
     plt.plot(x, y)
     plt.show()
 
-# piecewise function for humidity(time)
-@np.vectorize
-def humidity(t): 
-    if within(t, 0, 15):
-        return 10 + 8/3 * t 
-    elif within(t, 15, 25):
-        return 50 - 5/2 * (t - 15)
-    elif within(t, 25, 40):
-        return 25 + 11/3 * (t - 25)
-    elif within(t, 40, 60):
-        return 80 - 7/2 * (t - 40)
-    elif within(t, 60, 80):
-        return 10 + 4 * (t - 60)
-    elif within(t, 80, 95):
-        return 90 - 14/3 * (t - 80)
-    elif within(t, 95, 120):
-        return 20 + 6/5 * (t - 95)
-    else:
-        return None
+
+def humidity(): 
+    p_data = pd.read_csv('humidity_measurements.csv')
+    return (p_data['time (min)'], p_data['rel. humidity (%)'])
+
 
 # function for voltage(relative humidity)
 def h_sensor(RH):
@@ -165,8 +127,7 @@ def h_sensor(RH):
 
 
 def humidity_1():
-    x = np.linspace(0, 120, 10000)    
-    y = humidity(x)
+    x, y = humidity()
 
     plt.title("Observed CanSat Humidity")
     plt.xlabel("Time [min]")
@@ -191,12 +152,14 @@ def humidity_2():
 
 
 def humidity_3():
-    x = np.linspace(0, 120, 10000)
-    y = h_sensor(humidity(x))
+    x, y = humidity()
+    y = h_sensor(y)
 
     plt.title("Humidity Sensor Voltage Observed")
     plt.xlabel("Time [min]")
     plt.ylabel("Voltage [V]")
+
+    plt.yticks(np.arange(0, 0.85, 0.05))
 
     plt.grid(True)
     plt.plot(x, y)
