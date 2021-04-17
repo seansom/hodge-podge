@@ -103,13 +103,13 @@ def temp_2():
 def temp_3():
     x, y = temp()
     y = t_sensor(y)
-    y = 3.7 * (y / (y + 100000))
+    y = 5 * (y / (y + 100000))
 
     plt.title("Temperature Sensor Voltage Observed")
     plt.xlabel("Time [min]")
     plt.ylabel("Voltage [V]")
 
-    plt.yticks(np.arange(0, 3.4, 0.2))
+    plt.yticks(np.arange(0, 5, 0.25))
 
     plt.grid(True)
     plt.plot(x, y)
