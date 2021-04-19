@@ -66,8 +66,8 @@ def pressure_3():
 
 
 def temp(): 
-    p_data = pd.read_csv('temp_measurements.csv')
-    return (p_data['Time (min)'], p_data['Temperature (Celsius)'])
+    t_data = pd.read_csv('temp_measurements.csv')
+    return (t_data['Time (min)'], t_data['Temperature (Celsius)'])
 
 
 # function for thermistor resistance(temperature)
@@ -117,8 +117,8 @@ def temp_3():
 
 
 def humidity(): 
-    p_data = pd.read_csv('humidity_measurements.csv')
-    return (p_data['time (min)'], p_data['rel. humidity (%)'])
+    h_data = pd.read_csv('humidity_measurements.csv')
+    return (h_data['time (min)'], h_data['rel. humidity (%)'])
 
 
 # function for voltage(relative humidity)
@@ -155,6 +155,8 @@ def humidity_3():
     x, y = humidity()
     y = h_sensor(y)
 
+    print(min(y))
+
     plt.title("Humidity Sensor Voltage Observed")
     plt.xlabel("Time [min]")
     plt.ylabel("Voltage [V]")
@@ -169,17 +171,19 @@ def humidity_3():
 
 if __name__ == '__main__':
 
-    commands = [pressure_1, pressure_2, pressure_3, temp_1, temp_2, temp_3, humidity_1, humidity_2, humidity_3]
-    print([command.__name__ for command in commands])
+    humidity_3()
+
+    # commands = [pressure_1, pressure_2, pressure_3, temp_1, temp_2, temp_3, humidity_1, humidity_2, humidity_3]
+    # print([command.__name__ for command in commands])
     
-    while True:
-        try:
-            command = input(">")
+    # while True:
+    #     try:
+    #         command = input(">")
 
-            if command.lower() == 'q':
-                break
+    #         if command.lower() == 'q':
+    #             break
                 
-            commands[int(command) - 1]()
+    #         commands[int(command) - 1]()
 
-        except:
-            continue
+    #     except:
+    #         continue
