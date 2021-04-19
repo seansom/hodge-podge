@@ -42,10 +42,7 @@ def get_adc_max_change(data):
             max_change = abs(data[i + 1] - data[i])
             x, y = i, i + 1
 
-    if data[y] > data [x]:
-        return get_adc_code(data[y]) - get_adc_code(data[x])
-    
-    return get_adc_code(data[x]) - get_adc_code(data[y])
+    return abs(get_adc_code(data[y]) - get_adc_code(data[x]))
 
 
 def get_adc_relative_resolution(data):
