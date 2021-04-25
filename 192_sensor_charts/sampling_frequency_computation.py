@@ -25,8 +25,6 @@ t_data = (10000 * math.e ** (3810 * (1/(t_data + 273.15) - 1/298.15))) * 5 / ((1
 h_data = (7/1000 * h_data + 0.15) * 6
 
 
-
-
 def get_adc_code(Vin):
     global adc_bit_resolution, adc_reference_voltage
     return round((Vin / adc_reference_voltage) * (2 ** adc_bit_resolution))
