@@ -45,38 +45,6 @@ def get_adc_max_change(data):
 
     return abs(get_adc_code(data[y]) - get_adc_code(data[x]))
 
-a = get_adc_code(0.9569066590114285)
-b = get_adc_code(3.8951506793229447)
-c = get_adc_code(4.260000000000001)
-print(f'{bin(a)} {bin(b)} {bin(c)}')
-sample_packet = '1111111000110001000011000111011111011010001010001'
-sample_packet_li = [int(char) for char in list(sample_packet)]
-print(sample_packet_li)
-print('====')
-
-timer = 0
-pulsewidth = 5
-clock_bit = 0
-# for i in sample_packet_li:
-#     print(f'{timer}u, {5 if i else 0}')
-#     timer += 10
-#     print(f'{timer}u, {5 if i else 0}')
-
-for _ in sample_packet_li:
-    print(f'{timer}u, {5 if clock_bit == 0 else 0}')
-    timer += 10
-    print(f'{timer}u, {5 if clock_bit == 0 else 0}')
-
-    if clock_bit:
-        clock_bit = 0
-    else:
-        clock_bit = 1
-
-
-# for i in range(len(t_data)):
-#     print(i, h_data[i])
-# (get_adc_max_change(t_data))
-quit()
 
 def get_adc_relative_resolution(data):
     return math.log(get_adc_code(max(data)) - get_adc_code(min(data)), 2)
