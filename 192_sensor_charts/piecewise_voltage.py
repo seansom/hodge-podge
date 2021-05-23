@@ -42,15 +42,30 @@ def print_data_voltage():
             print(f'{time + bit_transmit_time}{time_scale}, {5 if bit else 0}')
             time += bit_transmit_time
 
+        parity = get_data_bits(p_data[minute]).count(1) % 2 == 0
+        print(f'{time}{time_scale}, {0 if parity else 5}')
+        print(f'{time + bit_transmit_time}{time_scale}, {0 if parity else 5}')
+        time += bit_transmit_time
+
         for bit in get_data_bits(t_data[minute]):
             print(f'{time}{time_scale}, {5 if bit else 0}')
             print(f'{time + bit_transmit_time}{time_scale}, {5 if bit else 0}')
             time += bit_transmit_time
 
+        parity = get_data_bits(t_data[minute]).count(1) % 2 == 0
+        print(f'{time}{time_scale}, {0 if parity else 5}')
+        print(f'{time + bit_transmit_time}{time_scale}, {0 if parity else 5}')
+        time += bit_transmit_time
+
         for bit in get_data_bits(h_data[minute]):
             print(f'{time}{time_scale}, {5 if bit else 0}')
             print(f'{time + bit_transmit_time}{time_scale}, {5 if bit else 0}')
             time += bit_transmit_time
+
+        parity = get_data_bits(h_data[minute]).count(1) % 2 == 0
+        print(f'{time}{time_scale}, {0 if parity else 5}')
+        print(f'{time + bit_transmit_time}{time_scale}, {0 if parity else 5}')
+        time += bit_transmit_time
 
 
 
@@ -65,7 +80,7 @@ def print_clock_voltage():
     curr_voltage = 0
 
     for _ in range(len(t_data)):
-        for _ in range(36):
+        for _ in range(39):
             print(f'{time}{time_scale}, {5 if not curr_voltage else 0}')
             print(f'{time + bit_transmit_time}{time_scale}, {5 if not curr_voltage else 0}')
             curr_voltage = 5 if not curr_voltage else 0
