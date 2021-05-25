@@ -88,7 +88,7 @@ def print_clock_voltage():
     
 
 
-# print_data_voltage()
-print_clock_voltage()
+print_data_voltage()
+# print_clock_voltage()
 
     

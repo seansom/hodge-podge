@@ -50,7 +50,7 @@ def get_adc_relative_resolution(data):
     return math.log(get_adc_code(max(data)) - get_adc_code(min(data)), 2)
 
 
-def get_min_sampling_freq(data):
+def get_min_sampling_freq(data):    
     global max_allowable_error
 
     return (get_adc_max_change(data) / (max_allowable_error * (2 ** get_adc_relative_resolution(data))))
