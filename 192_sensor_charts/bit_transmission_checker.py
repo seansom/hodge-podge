@@ -25,6 +25,13 @@ def main():
     print(get_voltage(0b001100111001))
     print(get_voltage(0b010100010011) / 6)
 
+    print("===")    
+
+    print([677.3, 679.2])
+    print(get_voltage(0b101000100001) / 1.2)
+    print(get_voltage(0b111000010111))
+    print(get_voltage(0b100001011011) / 6)
+
 
 if __name__ == '__main__':
     main()
