@@ -2,7 +2,7 @@ import os, sys, math
 import numpy as np
 import pandas as pd
 
-reading_delay_time = 300
+reading_delay_time = 60
 time_scale = 'm'
 
 adc_bit_resolution = 12
